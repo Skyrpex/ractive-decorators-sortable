@@ -9,29 +9,29 @@
 	var ractive_decorators_sortable__sortable = function sortable(node) {
 		node.draggable = true;
 
-		node.addEventListener("dragstart", dragstartHandler, false);
-		node.addEventListener("dragenter", dragenterHandler, false);
-		node.addEventListener("dragleave", removeTargetClass, false);
-		node.addEventListener("drop", removeTargetClass, false);
+		node.addEventListener('dragstart', dragstartHandler, false);
+		node.addEventListener('dragenter', dragenterHandler, false);
+		node.addEventListener('dragleave', removeTargetClass, false);
+		node.addEventListener('drop', removeTargetClass, false);
 
 		// necessary to prevent animation where ghost element returns
 		// to its (old) home
-		node.addEventListener("dragover", preventDefault, false);
+		node.addEventListener('dragover', preventDefault, false);
 
 		return {
 			teardown: function teardown() {
-				node.removeEventListener("dragstart", dragstartHandler, false);
-				node.removeEventListener("dragenter", dragenterHandler, false);
-				node.removeEventListener("dragleave", removeTargetClass, false);
-				node.removeEventListener("drop", removeTargetClass, false);
-				node.removeEventListener("dragover", preventDefault, false);
+				node.removeEventListener('dragstart', dragstartHandler, false);
+				node.removeEventListener('dragenter', dragenterHandler, false);
+				node.removeEventListener('dragleave', removeTargetClass, false);
+				node.removeEventListener('drop', removeTargetClass, false);
+				node.removeEventListener('dragover', preventDefault, false);
 			}
 		};
 	};
 
-	ractive_decorators_sortable__sortable.targetClass = "droptarget";
+	ractive_decorators_sortable__sortable.targetClass = 'droptarget';
 
-	var errorMessage = "The sortable decorator only works with elements that correspond to array members";
+	var errorMessage = 'The sortable decorator only works with elements that correspond to array members';
 
 	dragstartHandler = function (event) {
 		var storage = this._ractive,
@@ -40,7 +40,7 @@
 		sourceKeypath = storage.keypath.str;
 
 		// this decorator only works with array members!
-		lastDotIndex = sourceKeypath.lastIndexOf(".");
+		lastDotIndex = sourceKeypath.lastIndexOf('.');
 
 		if (lastDotIndex === -1) {
 			throw new Error(errorMessage);
@@ -53,7 +53,7 @@
 			throw new Error(errorMessage);
 		}
 
-		event.dataTransfer.setData("foo", true); // enables dragging in FF. go figure
+		event.dataTransfer.setData('foo', true); // enables dragging in FF. go figure
 
 		// keep a reference to the Ractive instance that 'owns' this data and this element
 		ractive = storage.root;
@@ -70,7 +70,7 @@
 		targetKeypath = this._ractive.keypath.str;
 
 		// this decorator only works with array members!
-		lastDotIndex = targetKeypath.lastIndexOf(".");
+		lastDotIndex = targetKeypath.lastIndexOf('.');
 
 		if (lastDotIndex === -1) {
 			throw new Error(errorMessage);
